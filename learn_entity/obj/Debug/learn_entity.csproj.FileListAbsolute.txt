@@ -1,0 +1,10 @@
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\learn_entity.exe.config
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\learn_entity.exe
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\learn_entity.pdb
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\EntityFramework.dll
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\EntityFramework.xml
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\obj\Debug\learn_entity.csprojResolveAssemblyReference.cache
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\obj\Debug\learn_entity.exe
+c:\users\rlz\documents\visual studio 2017\Projects\learn_entity\learn_entity\obj\Debug\learn_entity.pdb

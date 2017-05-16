@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a66dbfaa3f14e96b332b6e822fb9d83" Name="Diagram1">
+        <EntityTypeShape EntityType="RlzProjectModel.BudgetProj" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RlzProjectModel.EquipeProj" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RlzProjectModel.FicheProj" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RlzProjectModel.Personnel" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RlzProjectModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RlzProjectModel.TachesProj" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="RlzProjectModel.FK__BudgetPro__Budge__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__BudgetPro__IDPro__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__EquipePro__IDPer__0BC6C43E" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__EquipePro__IDPro__0AD2A005" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__TachesPro__Tache__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__FicheProj__ChefP__060DEAE8" ManuallyRouted="false" />
+        <AssociationConnector Association="RlzProjectModel.FK__TachesPro__IDPro__164452B1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

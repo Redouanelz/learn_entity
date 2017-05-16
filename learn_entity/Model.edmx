@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RlzProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BudgetProj">
+          <Key>
+            <PropertyRef Name="IDBugdet" />
+          </Key>
+          <Property Name="IDProj" Type="int" />
+          <Property Name="IDBugdet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Budget" Type="money" />
+          <Property Name="RaisonBudget" Type="varchar" MaxLength="50" />
+          <Property Name="BudgetAttribueA" Type="int" />
+          <Property Name="BudgetAttribueANom" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EquipeProj">
+          <Key>
+            <PropertyRef Name="IDMembreEquipe" />
+          </Key>
+          <Property Name="IDProj" Type="int" />
+          <Property Name="IDPerso" Type="int" />
+          <Property Name="IDMembreEquipe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomMembreEquipe" Type="varchar" MaxLength="50" />
+          <Property Name="RoleSurProj" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FicheProj">
+          <Key>
+            <PropertyRef Name="IDProj" />
+          </Key>
+          <Property Name="IDProj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomProj" Type="varchar" MaxLength="50" />
+          <Property Name="DescProj" Type="varchar" MaxLength="255" />
+          <Property Name="StatutProj" Type="varchar" MaxLength="50" />
+          <Property Name="CodeProj" Type="varchar" MaxLength="50" />
+          <Property Name="ChefProj" Type="varchar" MaxLength="50" />
+          <Property Name="ChefProjID" Type="int" />
+          <Property Name="LogoProj" Type="image" />
+          <Property Name="DateDebutProj" Type="date" />
+          <Property Name="DateFinProj" Type="date" />
+          <Property Name="CibleProjet" Type="money" />
+        </EntityType>
+        <EntityType Name="Personnel">
+          <Key>
+            <PropertyRef Name="IDPerso" />
+          </Key>
+          <Property Name="IDPerso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomPerso" Type="varchar" MaxLength="50" />
+          <Property Name="PrenomPerso" Type="varchar" MaxLength="50" />
+          <Property Name="PseudoPerso" Type="varchar" MaxLength="50" />
+          <Property Name="EmailPerso" Type="varchar" MaxLength="50" />
+          <Property Name="MotdepassePerso" Type="varchar" MaxLength="50" />
+          <Property Name="DateNaissancePerso" Type="date" />
+          <Property Name="CivilitePerso" Type="varchar" MaxLength="30" />
+          <Property Name="ImagePerso" Type="image" />
+          <Property Name="isAdmin" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TachesProj">
+          <Key>
+            <PropertyRef Name="IDTache" />
+          </Key>
+          <Property Name="IDProj" Type="int" />
+          <Property Name="IDTache" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="laTache" Type="varchar" MaxLength="255" />
+          <Property Name="StatutTache" Type="varchar" MaxLength="50" />
+          <Property Name="TacheAttribueA" Type="int" />
+          <Property Name="TacheAttribueANom" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__BudgetPro__Budge__117F9D94">
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="0..1" />
+          <End Role="BudgetProj" Type="Self.BudgetProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipeProj">
+              <PropertyRef Name="IDMembreEquipe" />
+            </Principal>
+            <Dependent Role="BudgetProj">
+              <PropertyRef Name="BudgetAttribueA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BudgetPro__IDPro__108B795B">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BudgetProj" Type="Self.BudgetProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="BudgetProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EquipePro__IDPer__0BC6C43E">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="IDPerso" />
+            </Principal>
+            <Dependent Role="EquipeProj">
+              <PropertyRef Name="IDPerso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EquipePro__IDPro__0AD2A005">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="EquipeProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FicheProj__ChefP__060DEAE8">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="IDPerso" />
+            </Principal>
+            <Dependent Role="FicheProj">
+              <PropertyRef Name="ChefProjID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TachesPro__IDPro__164452B1">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TachesProj" Type="Self.TachesProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="TachesProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TachesPro__Tache__173876EA">
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="0..1" />
+          <End Role="TachesProj" Type="Self.TachesProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipeProj">
+              <PropertyRef Name="IDMembreEquipe" />
+            </Principal>
+            <Dependent Role="TachesProj">
+              <PropertyRef Name="TacheAttribueA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RlzProjectModelStoreContainer">
+          <EntitySet Name="BudgetProj" EntityType="Self.BudgetProj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipeProj" EntityType="Self.EquipeProj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FicheProj" EntityType="Self.FicheProj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnel" EntityType="Self.Personnel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TachesProj" EntityType="Self.TachesProj" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BudgetPro__Budge__117F9D94" Association="Self.FK__BudgetPro__Budge__117F9D94">
+            <End Role="EquipeProj" EntitySet="EquipeProj" />
+            <End Role="BudgetProj" EntitySet="BudgetProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BudgetPro__IDPro__108B795B" Association="Self.FK__BudgetPro__IDPro__108B795B">
+            <End Role="FicheProj" EntitySet="FicheProj" />
+            <End Role="BudgetProj" EntitySet="BudgetProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EquipePro__IDPer__0BC6C43E" Association="Self.FK__EquipePro__IDPer__0BC6C43E">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="EquipeProj" EntitySet="EquipeProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EquipePro__IDPro__0AD2A005" Association="Self.FK__EquipePro__IDPro__0AD2A005">
+            <End Role="FicheProj" EntitySet="FicheProj" />
+            <End Role="EquipeProj" EntitySet="EquipeProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FicheProj__ChefP__060DEAE8" Association="Self.FK__FicheProj__ChefP__060DEAE8">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="FicheProj" EntitySet="FicheProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TachesPro__IDPro__164452B1" Association="Self.FK__TachesPro__IDPro__164452B1">
+            <End Role="FicheProj" EntitySet="FicheProj" />
+            <End Role="TachesProj" EntitySet="TachesProj" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TachesPro__Tache__173876EA" Association="Self.FK__TachesPro__Tache__173876EA">
+            <End Role="EquipeProj" EntitySet="EquipeProj" />
+            <End Role="TachesProj" EntitySet="TachesProj" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RlzProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BudgetProj">
+          <Key>
+            <PropertyRef Name="IDBugdet" />
+          </Key>
+          <Property Name="IDProj" Type="Int32" />
+          <Property Name="IDBugdet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Budget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RaisonBudget" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BudgetAttribueA" Type="Int32" />
+          <Property Name="BudgetAttribueANom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EquipeProj" Relationship="Self.FK__BudgetPro__Budge__117F9D94" FromRole="BudgetProj" ToRole="EquipeProj" />
+          <NavigationProperty Name="FicheProj" Relationship="Self.FK__BudgetPro__IDPro__108B795B" FromRole="BudgetProj" ToRole="FicheProj" />
+        </EntityType>
+        <EntityType Name="EquipeProj">
+          <Key>
+            <PropertyRef Name="IDMembreEquipe" />
+          </Key>
+          <Property Name="IDProj" Type="Int32" />
+          <Property Name="IDPerso" Type="Int32" />
+          <Property Name="IDMembreEquipe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomMembreEquipe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleSurProj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BudgetProjs" Relationship="Self.FK__BudgetPro__Budge__117F9D94" FromRole="EquipeProj" ToRole="BudgetProj" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FK__EquipePro__IDPer__0BC6C43E" FromRole="EquipeProj" ToRole="Personnel" />
+          <NavigationProperty Name="FicheProj" Relationship="Self.FK__EquipePro__IDPro__0AD2A005" FromRole="EquipeProj" ToRole="FicheProj" />
+          <NavigationProperty Name="TachesProjs" Relationship="Self.FK__TachesPro__Tache__173876EA" FromRole="EquipeProj" ToRole="TachesProj" />
+        </EntityType>
+        <EntityType Name="FicheProj">
+          <Key>
+            <PropertyRef Name="IDProj" />
+          </Key>
+          <Property Name="IDProj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomProj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescProj" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StatutProj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodeProj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChefProj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChefProjID" Type="Int32" />
+          <Property Name="LogoProj" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DateDebutProj" Type="DateTime" Precision="0" />
+          <Property Name="DateFinProj" Type="DateTime" Precision="0" />
+          <Property Name="CibleProjet" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="BudgetProjs" Relationship="Self.FK__BudgetPro__IDPro__108B795B" FromRole="FicheProj" ToRole="BudgetProj" />
+          <NavigationProperty Name="EquipeProjs" Relationship="Self.FK__EquipePro__IDPro__0AD2A005" FromRole="FicheProj" ToRole="EquipeProj" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FK__FicheProj__ChefP__060DEAE8" FromRole="FicheProj" ToRole="Personnel" />
+          <NavigationProperty Name="TachesProjs" Relationship="Self.FK__TachesPro__IDPro__164452B1" FromRole="FicheProj" ToRole="TachesProj" />
+        </EntityType>
+        <EntityType Name="Personnel">
+          <Key>
+            <PropertyRef Name="IDPerso" />
+          </Key>
+          <Property Name="IDPerso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomPerso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrenomPerso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PseudoPerso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailPerso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MotdepassePerso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateNaissancePerso" Type="DateTime" Precision="0" />
+          <Property Name="CivilitePerso" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePerso" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="isAdmin" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EquipeProjs" Relationship="Self.FK__EquipePro__IDPer__0BC6C43E" FromRole="Personnel" ToRole="EquipeProj" />
+          <NavigationProperty Name="FicheProjs" Relationship="Self.FK__FicheProj__ChefP__060DEAE8" FromRole="Personnel" ToRole="FicheProj" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TachesProj">
+          <Key>
+            <PropertyRef Name="IDTache" />
+          </Key>
+          <Property Name="IDProj" Type="Int32" />
+          <Property Name="IDTache" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="laTache" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StatutTache" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TacheAttribueA" Type="Int32" />
+          <Property Name="TacheAttribueANom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EquipeProj" Relationship="Self.FK__TachesPro__Tache__173876EA" FromRole="TachesProj" ToRole="EquipeProj" />
+          <NavigationProperty Name="FicheProj" Relationship="Self.FK__TachesPro__IDPro__164452B1" FromRole="TachesProj" ToRole="FicheProj" />
+        </EntityType>
+        <Association Name="FK__BudgetPro__Budge__117F9D94">
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="0..1" />
+          <End Role="BudgetProj" Type="Self.BudgetProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipeProj">
+              <PropertyRef Name="IDMembreEquipe" />
+            </Principal>
+            <Dependent Role="BudgetProj">
+              <PropertyRef Name="BudgetAttribueA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BudgetPro__IDPro__108B795B">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BudgetProj" Type="Self.BudgetProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="BudgetProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EquipePro__IDPer__0BC6C43E">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="IDPerso" />
+            </Principal>
+            <Dependent Role="EquipeProj">
+              <PropertyRef Name="IDPerso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EquipePro__IDPro__0AD2A005">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="EquipeProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TachesPro__Tache__173876EA">
+          <End Role="EquipeProj" Type="Self.EquipeProj" Multiplicity="0..1" />
+          <End Role="TachesProj" Type="Self.TachesProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipeProj">
+              <PropertyRef Name="IDMembreEquipe" />
+            </Principal>
+            <Dependent Role="TachesProj">
+              <PropertyRef Name="TacheAttribueA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FicheProj__ChefP__060DEAE8">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="IDPerso" />
+            </Principal>
+            <Dependent Role="FicheProj">
+              <PropertyRef Name="ChefProjID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TachesPro__IDPro__164452B1">
+          <End Role="FicheProj" Type="Self.FicheProj" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TachesProj" Type="Self.TachesProj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FicheProj">
+              <PropertyRef Name="IDProj" />
+            </Principal>
+            <Dependent Role="TachesProj">
+              <PropertyRef Name="IDProj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RlzProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BudgetProjs" EntityType="Self.BudgetProj" />
+          <EntitySet Name="EquipeProjs" EntityType="Self.EquipeProj" />
+          <EntitySet Name="FicheProjs" EntityType="Self.FicheProj" />
+          <EntitySet Name="Personnels" EntityType="Self.Personnel" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TachesProjs" EntityType="Self.TachesProj" />
+          <AssociationSet Name="FK__BudgetPro__Budge__117F9D94" Association="Self.FK__BudgetPro__Budge__117F9D94">
+            <End Role="EquipeProj" EntitySet="EquipeProjs" />
+            <End Role="BudgetProj" EntitySet="BudgetProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BudgetPro__IDPro__108B795B" Association="Self.FK__BudgetPro__IDPro__108B795B">
+            <End Role="FicheProj" EntitySet="FicheProjs" />
+            <End Role="BudgetProj" EntitySet="BudgetProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EquipePro__IDPer__0BC6C43E" Association="Self.FK__EquipePro__IDPer__0BC6C43E">
+            <End Role="Personnel" EntitySet="Personnels" />
+            <End Role="EquipeProj" EntitySet="EquipeProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EquipePro__IDPro__0AD2A005" Association="Self.FK__EquipePro__IDPro__0AD2A005">
+            <End Role="FicheProj" EntitySet="FicheProjs" />
+            <End Role="EquipeProj" EntitySet="EquipeProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TachesPro__Tache__173876EA" Association="Self.FK__TachesPro__Tache__173876EA">
+            <End Role="EquipeProj" EntitySet="EquipeProjs" />
+            <End Role="TachesProj" EntitySet="TachesProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FicheProj__ChefP__060DEAE8" Association="Self.FK__FicheProj__ChefP__060DEAE8">
+            <End Role="Personnel" EntitySet="Personnels" />
+            <End Role="FicheProj" EntitySet="FicheProjs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TachesPro__IDPro__164452B1" Association="Self.FK__TachesPro__IDPro__164452B1">
+            <End Role="FicheProj" EntitySet="FicheProjs" />
+            <End Role="TachesProj" EntitySet="TachesProjs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RlzProjectModelStoreContainer" CdmEntityContainer="RlzProjectEntities">
+          <EntitySetMapping Name="BudgetProjs">
+            <EntityTypeMapping TypeName="RlzProjectModel.BudgetProj">
+              <MappingFragment StoreEntitySet="BudgetProj">
+                <ScalarProperty Name="IDProj" ColumnName="IDProj" />
+                <ScalarProperty Name="IDBugdet" ColumnName="IDBugdet" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="RaisonBudget" ColumnName="RaisonBudget" />
+                <ScalarProperty Name="BudgetAttribueA" ColumnName="BudgetAttribueA" />
+                <ScalarProperty Name="BudgetAttribueANom" ColumnName="BudgetAttribueANom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipeProjs">
+            <EntityTypeMapping TypeName="RlzProjectModel.EquipeProj">
+              <MappingFragment StoreEntitySet="EquipeProj">
+                <ScalarProperty Name="IDProj" ColumnName="IDProj" />
+                <ScalarProperty Name="IDPerso" ColumnName="IDPerso" />
+                <ScalarProperty Name="IDMembreEquipe" ColumnName="IDMembreEquipe" />
+                <ScalarProperty Name="NomMembreEquipe" ColumnName="NomMembreEquipe" />
+                <ScalarProperty Name="RoleSurProj" ColumnName="RoleSurProj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FicheProjs">
+            <EntityTypeMapping TypeName="RlzProjectModel.FicheProj">
+              <MappingFragment StoreEntitySet="FicheProj">
+                <ScalarProperty Name="IDProj" ColumnName="IDProj" />
+                <ScalarProperty Name="NomProj" ColumnName="NomProj" />
+                <ScalarProperty Name="DescProj" ColumnName="DescProj" />
+                <ScalarProperty Name="StatutProj" ColumnName="StatutProj" />
+                <ScalarProperty Name="CodeProj" ColumnName="CodeProj" />
+                <ScalarProperty Name="ChefProj" ColumnName="ChefProj" />
+                <ScalarProperty Name="ChefProjID" ColumnName="ChefProjID" />
+                <ScalarProperty Name="LogoProj" ColumnName="LogoProj" />
+                <ScalarProperty Name="DateDebutProj" ColumnName="DateDebutProj" />
+                <ScalarProperty Name="DateFinProj" ColumnName="DateFinProj" />
+                <ScalarProperty Name="CibleProjet" ColumnName="CibleProjet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnels">
+            <EntityTypeMapping TypeName="RlzProjectModel.Personnel">
+              <MappingFragment StoreEntitySet="Personnel">
+                <ScalarProperty Name="IDPerso" ColumnName="IDPerso" />
+                <ScalarProperty Name="NomPerso" ColumnName="NomPerso" />
+                <ScalarProperty Name="PrenomPerso" ColumnName="PrenomPerso" />
+                <ScalarProperty Name="PseudoPerso" ColumnName="PseudoPerso" />
+                <ScalarProperty Name="EmailPerso" ColumnName="EmailPerso" />
+                <ScalarProperty Name="MotdepassePerso" ColumnName="MotdepassePerso" />
+                <ScalarProperty Name="DateNaissancePerso" ColumnName="DateNaissancePerso" />
+                <ScalarProperty Name="CivilitePerso" ColumnName="CivilitePerso" />
+                <ScalarProperty Name="ImagePerso" ColumnName="ImagePerso" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RlzProjectModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TachesProjs">
+            <EntityTypeMapping TypeName="RlzProjectModel.TachesProj">
+              <MappingFragment StoreEntitySet="TachesProj">
+                <ScalarProperty Name="IDProj" ColumnName="IDProj" />
+                <ScalarProperty Name="IDTache" ColumnName="IDTache" />
+                <ScalarProperty Name="laTache" ColumnName="laTache" />
+                <ScalarProperty Name="StatutTache" ColumnName="StatutTache" />
+                <ScalarProperty Name="TacheAttribueA" ColumnName="TacheAttribueA" />
+                <ScalarProperty Name="TacheAttribueANom" ColumnName="TacheAttribueANom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
